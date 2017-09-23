@@ -8,7 +8,7 @@ end
 # --- Method ---
 def download_actor_videos_label(actor_id)
   firsturl = "#{$JAVLIBRARY_URL}/cn/vl_star.php?s=#{actor_id}"
-  baseurl = "#{$JAVLIBRARY_URL}/cn/vl_star.php?&mode=&s=#{actor_id}&page="
+  baseurl = "#{$JAVLIBRARY_URL}/cn/vl_star.php?&mode=2&s=#{actor_id}&page="
   response = Mechanize.new do |agent|
     # Set timeout preference here
     agent.open_timeout = 5

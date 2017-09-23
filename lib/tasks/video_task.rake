@@ -1,12 +1,21 @@
-
+namespace :crawler do
+  desc 'Download all videos'
+  task :video => :environment do
+    Label.all.each do |label|
+      next if label.downloaded?
+      label.downloaded = true if video_downloader(label.video_label)
+    end
+  end
+end
 
 # --- Method ---
-def downloader(identifer)
-  baseurl = "http://www.#{@url}/cn/?v=#{identifer}"
+def video_downloader(identifer)
+  video = Video.new
+  baseurl = "#{$JAVLIBRARY_URL}/cn/?v=#{identifer}"
   response = Mechanize.new do |agent|
     agent.read_timeout = 2
     agent.open_timeout = 2
-    agent.user_agent = Mechanize::AGENT_ALIASES.values[rand(21)]
+    # agent.user_agent = Mechanize::AGENT_ALIASES.values[rand(21)]
   end
 
   begin
@@ -17,28 +26,49 @@ def downloader(identifer)
     return
   end
 
-  doc = Nokogiri::HTML(response.page.body)
+  doc = Nokogiri::HTML(response.page.body.gsub!(/(&nbsp;|\s)+/, " "))
 
-  video_title, details, video_genres, video_jacket_img = String.new, Array.new, String.new, String.new
+  casts, genres = [], []
 
-  video_title = doc.search('div[@id="video_title"]/h3/a').children.text
-  doc.search('//div[@id="video_info"]/div[@class="item"]/table/tr/td[@class="text"]').map do |row|
-    details << row.children.text
-  end
-  pp details
+  video.video_name = doc.search('div[@id="video_title"]/h3/a').children.text.strip
 
-  doc.search('//div[@id="video_genres"]/table/tr/td[@class="text"]/span[@class="genre"]/a').each do |row|
-    video_genres << row.children.text << " "
-  end
+  video.video_id = doc.search('//div[@id="video_info"]/div[@id="video_id"]/table/tr/td[@class="text"]').children.text.strip
+
+  video.release_date = doc.search('//div[@id="video_info"]/div[@id="video_date"]/table/tr/td[@class="text"]').children.text.strip
+
+  video.length = doc.search('//div[@id="video_info"]/div[@id="video_length"]/table/tr/td[2]/span').children.text.strip
+
+  video.director = doc.search('//div[@id="video_info"]/div[@id="video_director"]/table/tr/td[@class="text"]').children.text.strip
+
+  video.maker = doc.search('//div[@id="video_info"]/div[@id="video_maker"]/table/tr/td[@class="text"]').children.text.strip
+
+  video.label = doc.search('//div[@id="video_info"]/div[@id="video_label"]/table/tr/td[@class="text"]').children.text.strip
+
+  video.rating = doc.search('//div[@id="video_info"]/div[@id="video_review"]/table/tr/td[@class="text"]/span[@class="score"]').children.text.strip.gsub('(', '').gsub(')', '')
 
   doc.search('//img[@id="video_jacket_img"]').each do |row|
-    video_jacket_img = row['src']
+    video.img = 'http:' + row['src']
   end
 
-  # return data format: title$id$date$director$maker$label$cast$genres$img_url
-  "#{video_title}$#{details[0]}$#{details[1]}$#{details[2]}$#{details[3]}$#{details[4]}$#{details[-1]}$#{video_genres}$#{video_jacket_img}"
-  #result = Hash.new
-  #result["title"] = video_title; result["id"] = details[0]; result["date"] = details[1]
-  #result["director"] = details[2]; result["maker"] = details[3]; result["label"] = details[4]
-  #result["cast"] = details[-1]; result["genres"] = video_genres; result["img_url"] = video_jacket_img
+  doc.search('//span[@class="star"]/a').each do |row|
+    casts << row.text
+  end
+
+  doc.search('//div[@id="video_genres"]/table/tr/td[@class="text"]/span[@class="genre"]/a').each do |row|
+    genres << row.children.text
+  end
+
+  casts.each do |cast|
+    begin
+      video.actors << Actor.where("name = ?", cast).first
+    rescue
+      next
+    end
+  end
+
+  genres.each do |genre|
+    video.genres << Genre.where("name = ?", genre).first
+  end
+
+  video.save
 end
