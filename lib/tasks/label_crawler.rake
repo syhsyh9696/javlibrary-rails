@@ -41,7 +41,11 @@ def download_actor_videos_label(actor_id, method)
   result = []
   1.upto(last_page) do |page|
     tempurl = baseurl + page.to_s
-    response.get tempurl
+    begin
+      response.get tempurl
+    rescue
+      next
+    end
 
     Nokogiri::HTML(response.page.body).search('//div[@class="video"]/a').each do |row|
       # Data:

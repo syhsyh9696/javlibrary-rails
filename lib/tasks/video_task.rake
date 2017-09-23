@@ -6,6 +6,7 @@ namespace :crawler do
       label.downloaded = true if video_downloader(label.video_label)
     end
   end
+
 end
 
 # --- Method ---
