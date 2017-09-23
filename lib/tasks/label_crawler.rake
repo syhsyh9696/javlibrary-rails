@@ -1,12 +1,17 @@
 namespace :crawler do
-  desc 'Download all video label'
+  desc 'Download all video labels'
   task :label => :environment do
-    select_actors()
+    create()
+  end
+
+  desc 'Update all video labels'
+  task :label_update => :environment do
+    update()
   end
 end
 
 # --- Method ---
-def download_actor_videos_label(actor_id)
+def download_actor_videos_label(actor_id, method)
   firsturl = "#{$JAVLIBRARY_URL}/cn/vl_star.php?s=#{actor_id}"
   baseurl = "#{$JAVLIBRARY_URL}/cn/vl_star.php?&mode=2&s=#{actor_id}&page="
   response = Mechanize.new do |agent|
@@ -15,13 +20,22 @@ def download_actor_videos_label(actor_id)
     agent.read_timeout = 5
   end
 
-  response.get firsturl
+  begin
+    response.get firsturl
+  rescue
+    return nil
+  end
 
   doc = Nokogiri::HTML(response.page.body)
-  last_page = 1
-  doc.search('//div[@class="page_selector"]/a[@class="page last"]').each do |row|
-    last_page = row['href'].split("=")[-1].to_i
+
+  # Judge method here(:update, :create)
+  last_page = 1 if method == :update
+  if method == :create
+    doc.search('//div[@class="page_selector"]/a[@class="page last"]').each do |row|
+      last_page = row['href'].split("=")[-1].to_i
+    end
   end
+
 
   result = []
   1.upto(last_page) do |page|
@@ -42,9 +56,16 @@ def download_actor_videos_label(actor_id)
 
 end
 
-def select_actors
+def create
   actors = Actor.all
   actors.each do |actor|
-    download_actor_videos_label(actor.actor_label)
+    download_actor_videos_label(actor.actor_label, :create)
+  end
+end
+
+def update
+  actors = Actor.all
+  actors.each do |actor|
+    download_actor_videos_label(actor.actor_label, :update)
   end
 end
