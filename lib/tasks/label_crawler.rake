@@ -29,6 +29,7 @@ def download_actor_videos_label(actor_id, method)
   doc = Nokogiri::HTML(response.page.body)
 
   # Judge method here(:update, :create)
+  last_page = 1
   last_page = 1 if method == :update
   if method == :create
     doc.search('//div[@class="page_selector"]/a[@class="page last"]').each do |row|
