@@ -3,15 +3,16 @@ namespace :crawler do
   task :video => :environment do
     Label.all.each do |label|
       next if label.downloaded?
-      label.downloaded = true if video_downloader(label.video_label)
+      label.downloaded = true if video_downloader(label.video_label, label.id)
+      label.save
     end
   end
 
 end
 
 # --- Method ---
-def video_downloader(identifer)
-  video = Video.new
+def video_downloader(identifer, vid)
+  video = Video.new; video.id = vid
   baseurl = "#{$JAVLIBRARY_URL}/cn/?v=#{identifer}"
   response = Mechanize.new do |agent|
     agent.read_timeout = 2
@@ -68,7 +69,11 @@ def video_downloader(identifer)
   end
 
   genres.each do |genre|
-    video.genres << Genre.where("name = ?", genre).first
+    begin
+      video.genres << Genre.where("name = ?", genre).first
+    rescue
+      next
+    end
   end
 
   video.save
