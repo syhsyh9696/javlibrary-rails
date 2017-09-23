@@ -29,7 +29,7 @@ def get_all_actors
         actor = Actor.new
         actor.name = name
         actor.actor_label = label
-        actor.type = alphabet
+        actor.actor_type = alphabet
         actor.save
       end
     end

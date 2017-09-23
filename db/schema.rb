@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170923031648) do
+ActiveRecord::Schema.define(version: 20170923053646) do
 
   create_table "actors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -20,10 +20,24 @@ ActiveRecord::Schema.define(version: 20170923031648) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "actors_videos", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "video_id"
+    t.integer "actor_id"
+    t.index ["actor_id"], name: "index_actors_videos_on_actor_id", using: :btree
+    t.index ["video_id"], name: "index_actors_videos_on_video_id", using: :btree
+  end
+
   create_table "genres", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "genres_videos", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "video_id"
+    t.integer "genre_id"
+    t.index ["genre_id"], name: "index_genres_videos_on_genre_id", using: :btree
+    t.index ["video_id"], name: "index_genres_videos_on_video_id", using: :btree
   end
 
   create_table "labels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
