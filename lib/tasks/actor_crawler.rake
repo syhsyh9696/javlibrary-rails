@@ -1,13 +1,13 @@
 namespace :crawler do
   desc 'Download all actors'
   task :actor => :environment do
-    get_all_actor()
+    get_all_actors()
   end
 end
 
 # --- Method ---
-def get_all_actor
-  firsturl = "http://www.ja14b.com/cn/star_list.php?prefix="
+def get_all_actors
+  firsturl = "#{$JAVLIBRARY_URL}/cn/star_list.php?prefix="
 
   'A'.upto('Z') do |alphabet|
     response = Mechanize.new
