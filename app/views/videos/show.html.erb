@@ -1,0 +1,33 @@
+<div class="jumbotron center-block">
+  <h1><%= @video.video_id %></h1>
+  <p class="lead">
+    <div class="">
+      <img src="<%= @video.img %>" class="img-responsive" alt="Responsive image">
+    </div>
+  </p>
+  <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+</div>
+
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Name</h4>
+    <p><%= @video.video_name %></p>
+
+    <h4>Release Date</h4>
+    <p><%= @video.release_date %></p>
+
+    <h4>Length</h4>
+    <p><%= @video.length %></p>
+  </div>
+
+  <div class="col-lg-6">
+    <h4>Subheading</h4>
+    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+    <h4>Subheading</h4>
+    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+    <h4>Subheading</h4>
+    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="col-md-12">
+  <div class="group">
+    <%= link_to("New video", new_video_path, class: "btn btn-primary pull-right") %>
+  </div>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>ID</td>
+        <td>Name</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @videos.each do |video| %>
+        <tr>
+          <td>#</td>
+          <td><%= link_to(video.video_id, video_path(video)) %></td>
+          <td><%= video.video_name %></td>
+        </tr>
+      <% end %>
+      <%= will_paginate @videos %>
+    </tbody>
+  </table>
+</div>
