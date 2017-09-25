@@ -25,7 +25,7 @@ def video_downloader(identifer, vid)
   rescue Timeout::Error
     retry
   rescue
-    return
+    return false
   end
 
   doc = Nokogiri::HTML(response.page.body.gsub!(/(&nbsp;|\s)+/, " "))

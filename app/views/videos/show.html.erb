@@ -29,7 +29,7 @@
       <tr class="active">
         <td>#</td>
         <td><%= actor.id %></td>
-        <td><%= actor.name %></td>
+        <td><%= link_to actor.name, actor_path(actor) %></td>
         <td><%= actor.actor_label.upcase %></td>
       </tr>
     <% end %>
