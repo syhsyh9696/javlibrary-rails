@@ -1,0 +1,25 @@
+<div class="col-md-12">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Label</td>
+        <td>Type</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @actors.each do |actor| %>
+        <tr>
+          <td>#</td>
+          <td><%= link_to(actor.id, actor_path(actor)) %></td>
+          <td><%= actor.name %></td>
+          <td><%= actor.actor_label.upcase %></td>
+          <td><%= actor.actor_type %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="text-center"><%= will_paginate @actors %></div>
+</div>

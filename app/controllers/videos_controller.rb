@@ -5,6 +5,5 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
-    p @video
   end
 end

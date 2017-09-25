@@ -1,7 +1,7 @@
 namespace :crawler do
   desc 'Download all videos'
   task :video => :environment do
-    Label.all.each do |label|
+    Label.where('downloaded = ?', 0).each do |label|
       next if label.downloaded?
       label.downloaded = true if video_downloader(label.video_label, label.id)
       label.save

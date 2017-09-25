@@ -1,33 +1,59 @@
-<div class="jumbotron center-block">
-  <h1><%= @video.video_id %></h1>
-  <p class="lead">
-    <div class="">
-      <img src="<%= @video.img %>" class="img-responsive" alt="Responsive image">
-    </div>
-  </p>
-  <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+<ul class="breadcrumb">
+  <li><%= link_to("Videos", videos_path) %></li>
+  <li class="active"><%= @video.video_id %></li>
+</ul>
+<div class="jumbotron">
+  <% video_genres(@video).each do |genre| %>
+    <span class="label label-success"><%= genre %></span>
+  <% end %>
+  <h1><%= @video.video_id  %></h1>
+  <p><%= @video.video_name %></p>
+  <br>
+  <img src="<%= @video.img %>">
+  <br>
+  <br>
+  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+</div>
+<h2>Actors</h2>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>LABEL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @video.actors.each do |actor| %>
+      <tr class="active">
+        <td>#</td>
+        <td><%= actor.id %></td>
+        <td><%= actor.name %></td>
+        <td><%= actor.actor_label.upcase %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<h2>Video Info</h2>
+<div class="panel panel-primary">
+  <div class="panel-heading">Release Date</div>
+  <div class="panel-body">
+    <%= @video.release_date %>
+  </div>
 </div>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Name</h4>
-    <p><%= @video.video_name %></p>
-
-    <h4>Release Date</h4>
-    <p><%= @video.release_date %></p>
-
-    <h4>Length</h4>
-    <p><%= @video.length %></p>
+<div class="panel panel-primary">
+  <div class="panel-heading">Maker</div>
+  <div class="panel-body">
+    <%= @video.maker %>
   </div>
+</div>
 
-  <div class="col-lg-6">
-    <h4>Subheading</h4>
-    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-    <h4>Subheading</h4>
-    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-    <h4>Subheading</h4>
-    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">Length</div>
+  <div class="panel-body">
+    <%= @video.length %>
   </div>
 </div>
