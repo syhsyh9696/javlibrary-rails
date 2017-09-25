@@ -1,0 +1,20 @@
+<ul class="breadcrumb">
+  <li><%= link_to "Home", root_path %></li>
+  <li class="active">Stars</li>
+</ul>
+
+<div class="jumbotron">
+  <h1>Stars page</h1>
+  <br>
+  <p>Source: <%= link_to 'Javlibray', 'http://www.ja14b.com/cn/star_mostfav.php' %></p>
+  <p>Last update time: <%= @stars[0].updated_at %></p>
+</div>
+
+<ul class="list-group">
+  <% @stars.each do |star| %>
+    <li class="list-group-item">
+      <span class="badge"><%= star.rank %></span>
+      <%= link_to star.name, actor_path(Actor.where('actor_label = ?', star.actor_label).first.id) %>
+    </li>
+  <% end %>
+</ul>

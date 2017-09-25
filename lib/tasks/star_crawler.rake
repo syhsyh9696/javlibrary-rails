@@ -2,7 +2,7 @@ namespace :crawler do
   desc 'Download all stars'
   task :star => :environment do
     Star.delete_all
-    get_all_actors()
+    get_all_stars()
   end
 end
 
@@ -17,8 +17,14 @@ def get_all_stars
   end
   response.get url
 
-  doc = response.page.body
+  doc = Nokogiri::HTML(response.page.body.gsub(/(&nbsp;|\s)+/, " "))
   doc.search("//div[@class='starbox']/div[@class='searchitem']").each do |item|
-    pp item
+    star = Star.new
+    star.id = item.search("./h3").text[1..2].to_i
+    star.rank = item.search("./h3").text[1..2].to_i
+    star.img = item.search("./table/tr/td/img")[0].attributes['src'].value
+    star.name = item.search("./table/tr/td/img")[0].attributes['title'].value
+    star.actor_label = item.search("./a")[0].attributes['href'].value.split('=')[-1]
+    star.save
   end
 end
