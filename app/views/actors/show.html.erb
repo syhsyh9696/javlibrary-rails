@@ -40,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @actor.videos.each do |video| %>
+        <% @actor.videos.order("release_date ASC").each do |video| %>
           <tr class="active">
             <td>#</td>
             <td><%= link_to(video.video_id, video_path(video)) %></td>

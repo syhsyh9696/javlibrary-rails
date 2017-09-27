@@ -44,6 +44,8 @@ gem 'grape-entity'
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 
+gem 'ransack'
+
 # 分页
 gem 'will_paginate-bootstrap'
 

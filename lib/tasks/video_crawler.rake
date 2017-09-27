@@ -22,9 +22,10 @@ def video_downloader(identifer, vid)
 
   begin
     response.get baseurl
-  rescue Timeout::Error
-    retry
+  # rescue Timeout::Error
+  #   retry
   rescue
+    p identifer
     return false
   end
 
