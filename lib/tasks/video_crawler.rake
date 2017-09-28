@@ -3,8 +3,18 @@ namespace :crawler do
   task :video => :environment do
     Label.where('downloaded = ?', 0).each do |label|
       next if label.downloaded?
-      label.downloaded = true if video_downloader(label.video_label, label.id)
-      label.save
+      sign = video_downloader(label.video_label, label.id)
+
+      next if sign == 0
+
+      if sign
+        label.downloaded = true
+        label.save
+      else
+        label.downloaded = 3
+        label.save
+      end
+
     end
   end
 
@@ -25,8 +35,7 @@ def video_downloader(identifer, vid)
   # rescue Timeout::Error
   #   retry
   rescue
-    p identifer
-    return false
+    return 0
   end
 
   doc = Nokogiri::HTML(response.page.body.gsub!(/(&nbsp;|\s)+/, " "))
@@ -77,5 +86,5 @@ def video_downloader(identifer, vid)
     end
   end
 
-  video.save
+  return video.save
 end
