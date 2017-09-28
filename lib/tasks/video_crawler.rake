@@ -11,8 +11,7 @@ namespace :crawler do
         label.downloaded = true
         label.save
       else
-        label.downloaded = 3
-        label.save
+        label.destory
       end
 
     end
