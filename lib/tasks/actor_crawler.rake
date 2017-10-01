@@ -68,7 +68,7 @@ def get_all_actors_label_from_javbus
       label = item.attributes['src'].value.split('/')[-1].split('_')[0]
       name = item.attributes['title'].value.split('（')[0]
 
-      next if label = "nowprinting.gif"
+      next if label == "nowprinting.gif"
 
       actor = Actor.where('name = ?', name).first
       next if actor == nil
