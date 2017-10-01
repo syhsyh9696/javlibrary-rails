@@ -8,6 +8,11 @@ namespace :crawler do
   task :javbus_label => :environment do
     get_all_actors_label_from_javbus()
   end
+
+  desc 'Format all javbus labels(remove "nowprinting.gif")'
+  task :javbus_label_format => :environment do
+    format_javbus_labels()
+  end
 end
 
 # --- Method ---
@@ -56,17 +61,28 @@ def get_all_actors_label_from_javbus
   page = Mechanize.new
   firsturl = "https://www.javbus2.pw/actresses/"
   #1.upto(JAVBUS_MAX_PAGE).each do |num|
-  1.upto(JAVBUS_MAX_PAGE).each do |num|
+  716.upto(JAVBUS_MAX_PAGE).each do |num|
     url = firsturl + num.to_s
     doc = Nokogiri::HTML(page.get(url).body)
     doc.search('//div[@id="waterfall"]/div/a/div[1]/img').each do |item|
       label = item.attributes['src'].value.split('/')[-1].split('_')[0]
       name = item.attributes['title'].value.split('（')[0]
 
+      next if label = "nowprinting.gif"
+
       actor = Actor.where('name = ?', name).first
       next if actor == nil
 
       actor.javbus_label = label
+      # actor.save
+    end
+  end
+end
+
+def format_javbus_labels
+  Actor.all.each do |actor|
+    if actor.javbus_label == "nowprinting.gif"
+      actor.javbus_label = nil
       actor.save
     end
   end
