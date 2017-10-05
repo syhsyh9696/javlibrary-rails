@@ -41,7 +41,7 @@
       </thead>
       <tbody>
         <% @actor.videos.order("release_date DESC").each do |video| %>
-          <tr class="active">
+          <tr>
             <td>#</td>
             <td><%= link_to(video.video_id, video_path(video)) %></td>
             <td><%= video.release_date %></td>
