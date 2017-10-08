@@ -13,8 +13,12 @@ namespace :crawler do
       else
         label.destroy
       end
-
     end
+  end
+
+  desc "Download test"
+  task :video_test do
+    download_test("javli4qw7m")
   end
 
 end
@@ -62,7 +66,7 @@ def video_downloader(identifer, vid)
   end
 
   doc.search('//span[@class="star"]/a').each do |row|
-    casts << row.text
+    casts << row.attributes['href'].value.split('=')[-1]
   end
 
   doc.search('//div[@id="video_genres"]/table/tr/td[@class="text"]/span[@class="genre"]/a').each do |row|
@@ -71,7 +75,7 @@ def video_downloader(identifer, vid)
 
   casts.each do |cast|
     begin
-      video.actors << Actor.where("name = ?", cast).first
+      video.actors << Actor.where("actor_label = ?", cast).first
     rescue
       next
     end
@@ -86,4 +90,30 @@ def video_downloader(identifer, vid)
   end
 
   return video.save
+end
+
+def download_test(identifer)
+  baseurl = "#{$JAVLIBRARY_URL}/cn/?v=#{identifer}"
+  response = Mechanize.new do |agent|
+    agent.read_timeout = 2
+    agent.open_timeout = 2
+    # agent.user_agent = Mechanize::AGENT_ALIASES.values[rand(21)]
+  end
+
+  begin
+    response.get baseurl
+  # rescue Timeout::Error
+  #   retry
+  rescue
+    return 0
+  end
+
+  doc = Nokogiri::HTML(response.page.body.gsub!(/(&nbsp;|\s)+/, " "))
+  casts = []
+
+  doc.search('//span[@class="star"]/a').each do |row|
+    casts << row
+    pp row.attributes['href'].value.split('=')[-1]
+  end
+
 end

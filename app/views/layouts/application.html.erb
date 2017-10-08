@@ -14,6 +14,12 @@
       <%= render "common/flashes" %>
       <%= yield %>
     </div>
-    <%= render "common/footer" %>
+    
+    <!-- 清除浮动 -->
+    <div class="clearfix" style="margin-bottom: 50px;"></div>
+
+    <div class="container">
+      <%= render "common/footer" %>
+    </div>
   </body>
 </html>

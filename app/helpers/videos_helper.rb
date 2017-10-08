@@ -12,4 +12,9 @@ module VideosHelper
     end
     genres
   end
+
+  def video_rating_format(rating)
+    return '0.0' if rating == ''
+    rating
+  end
 end

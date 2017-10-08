@@ -18,3 +18,12 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+set :environment, "development"
+set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
+
+every :day, :at => '01:00am' do
+  rake "crawler:star"
+  rake "crawler:actor"
+  rake "crawler:labels_update_release"
+  rake "crawler:video"
+end

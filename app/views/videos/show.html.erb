@@ -37,23 +37,59 @@
 </table>
 <br>
 <h2>Video Info</h2>
-<div class="panel panel-primary">
-  <div class="panel-heading">Release Date</div>
-  <div class="panel-body">
-    <%= @video.release_date %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Release Date</div>
+      <div class="panel-body">
+        <%= @video.release_date %>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">Maker</div>
-  <div class="panel-body">
-    <%= @video.maker %>
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Maker</div>
+      <div class="panel-body">
+        <%= @video.maker %>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">Length</div>
-  <div class="panel-body">
-    <%= @video.length %>
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Length</div>
+      <div class="panel-body">
+        <%= @video.length %>
+      </div>
+    </div>
   </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Director</div>
+      <div class="panel-body">
+        <%= @video.director %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Rating</div>
+      <div class="panel-body">
+        <%= video_rating_format(@video.rating) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Lable</div>
+      <div class="panel-body">
+        <%= @video.label %>
+      </div>
+    </div>
+  </div>
+
 </div>
