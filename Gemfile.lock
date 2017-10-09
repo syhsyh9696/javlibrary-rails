@@ -72,6 +72,8 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
+    font-awesome-rails (4.7.0.1)
+      railties (>= 3.2, < 5.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     grape (1.0.1)
@@ -233,6 +235,7 @@ DEPENDENCIES
   bootswatch-rails
   byebug
   coffee-rails (~> 4.2)
+  font-awesome-rails
   grape
   grape-entity
   jbuilder (~> 2.5)

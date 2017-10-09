@@ -43,6 +43,7 @@ gem 'grape-entity'
 
 gem 'bootstrap-sass'
 gem 'bootswatch-rails'
+gem "font-awesome-rails"
 
 gem 'ransack'
 
