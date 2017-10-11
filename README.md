@@ -1,24 +1,29 @@
-# README
+# AVDICT
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+AVDICT => AV + Addict 一种优雅的方式创建你自己的AV数据库。
 
-Things you may want to cover:
+## 使用什么
 
-* Ruby version
+* Ruby - 程序员好朋友
+* Rails - 可靠 && 易用的web框架
 
-* System dependencies
+## 数据来源
 
-* Configuration
+不同于手机用户常用的Javbus，AVDICT的数据来自于Javlibrary。
 
-* Database creation
+## 你需要做什么
 
-* Database initialization
+* 在你的服务器上快速部署 Ruby && Rails 环境
+* Clone this rails app
+* bundle install
 
-* How to run the test suite
+## 如何生成数据库
+```ruby
+# 查看相关命令
+rake --task
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+rake crawler:genre
+rake crawler:actor
+rake crawler:label
+rake crawler:video
+```
