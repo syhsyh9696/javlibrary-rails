@@ -47,6 +47,8 @@ gem "font-awesome-rails"
 
 gem 'ransack'
 
+gem 'devise'
+
 # 分页
 gem 'will_paginate-bootstrap'
 

@@ -14,5 +14,6 @@ module JavLibraryRails
 
     # Define ENV['url'] for this crawler, default javlibrary url.
     $JAVLIBRARY_URL = "http://www.ja14b.com"
+    
   end
 end

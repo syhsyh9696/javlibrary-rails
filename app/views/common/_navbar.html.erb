@@ -33,12 +33,21 @@
         </li>
       </ul>
       <%= render "common/search" %>
-      <!--
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" target="_blank">Sign up</a></li>
-        <li><a href="#" target="_blank">Sign in</a></li>
-      </ul>
-      -->
+      <% if !current_user %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to("Sign Up", new_user_registration_path) %></li>
+          <li><%= link_to("Sign In", new_user_session_path) %></li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.username %> <span class="caret"></span></a>
+            <ul class="dropdown-menu" aria-labelledby="download">
+              <li><%= link_to("Log out", destroy_user_session_path, method: :delete) %> </li>
+            </ul>
+          </li>
+        </ul>
+      <% end %>
 
     </div>
   </div>
