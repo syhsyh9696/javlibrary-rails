@@ -1,0 +1,7 @@
+<% if current_user %>
+  <% if !current_user %>
+    <h2 id="nav-tabs"><button type="button" class="btn btn-primary">Follow</button></h2>
+  <% else %>
+    <h2 id="nav-tabs"><button type="button" class="btn btn-primary">Followed</button></h2>
+  <% end %>
+<% end %>
