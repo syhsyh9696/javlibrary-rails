@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Home</li>
-  <li class="breadcrumb-item">Actor</li>
+  <li class="breadcrumb-item">Actors</li>
   <li class="breadcrumb-item active"><%= @actor.name %></li>
 </ol>
 
@@ -9,7 +9,18 @@
     <h2><%= @actor.name %></h2>
     <strong><%= @actor.videos.size %></strong> <%= "Porn".pluralize(@actor.videos.size) %>
     <br>
-    <%= render "follow" %>
+    <strong><%= @actor.followers %></strong> <%= "Follower".pluralize(@actor.followers) %>
+    <br>
+    <% unless !current_user %>
+      <div id="follow_form">
+        <% if current_user.following?(@actor) %>
+          <%= render 'unfollow' %>
+        <% else %>
+          <%= render 'follow' %>
+        <% end %>
+      </div>
+    <% end %>
+    <h4>Information</h4>
   </div>
   <div class="col-md-9">
     <ul class="nav nav-tabs">

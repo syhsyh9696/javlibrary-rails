@@ -4,4 +4,8 @@ class Actor < ApplicationRecord
 
   has_and_belongs_to_many :videos
   has_and_belongs_to_many :users, -> { distinct }
+
+  def followers
+    self.users.size
+  end
 end

@@ -1,7 +1,4 @@
-<% if current_user %>
-  <% if !current_user %>
-    <h2 id="nav-tabs"><button type="button" class="btn btn-primary">Follow</button></h2>
-  <% else %>
-    <h2 id="nav-tabs"><button type="button" class="btn btn-primary">Followed</button></h2>
-  <% end %>
+<%= form_for current_user, :url => url_for(:controller => 'relationships', :action => 'create'), :html => {:method => :post} do |f| %>
+  <div><%= hidden_field_tag :actor_id, @actor.id %></div>
+  <%= f.submit "Follow", class: "btn btn-primary" %>
 <% end %>

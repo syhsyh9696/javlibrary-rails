@@ -6,12 +6,13 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :actors, -> { distinct }
 
-  def follow(other_actor)
-    self.actors << other_actor unless self.actors.include?(other_actor)
+
+  def follow(actor_id)
+    self.actors << Actor.find(actor_id) unless self.actors.include?(Actor.find(actor_id))
   end
 
-  def unfollow(other_actor)
-    self.actors.find(other_actor).destroy if self.actors.include?(other_actor)
+  def unfollow(actor_id)
+    self.actors.delete(Actor.find(actor_id)) if self.actors.include?(Actor.find(actor_id))
   end
 
   def following?(other_actor)
