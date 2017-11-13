@@ -1,16 +1,12 @@
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Home</li>
-  <li class="breadcrumb-item">Actors</li>
+  <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
+  <li class="breadcrumb-item"><%= link_to("Actors", actors_path) %></li>
   <li class="breadcrumb-item active"><%= @actor.name %></li>
 </ol>
 
 <div class="row">
   <div class="col-md-3">
-    <h2><%= @actor.name %></h2>
-    <strong><%= @actor.videos.size %></strong> <%= "Porn".pluralize(@actor.videos.size) %>
-    <br>
-    <strong><%= @actor.followers %></strong> <%= "Follower".pluralize(@actor.followers) %>
-    <br>
+    <h2><%= @actor.name %></h2><strong><%= @actor.followers %></strong> <%= "Follower".pluralize(@actor.followers) %>
     <% unless !current_user %>
       <div id="follow_form">
         <% if current_user.following?(@actor) %>
@@ -20,6 +16,7 @@
         <% end %>
       </div>
     <% end %>
+    <br>
     <h4>Information</h4>
   </div>
   <div class="col-md-9">

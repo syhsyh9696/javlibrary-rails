@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-8">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Home</li>
+        <li class="breadcrumb-item active"><%= link_to("Home", root_path) %></li>
         <li class="breadcrumb-item active">User</li>
         <li class="breadcrumb-item"><%= @user.id %></li>
       </ol>
@@ -20,6 +20,7 @@
         </div>
         <div class="panel-footer">Footer here</div>
       </div>
+
     </div>
 
     <div class="col-md-4">
