@@ -1,0 +1,6 @@
+<div id="follow_form">
+<%= form_for current_user, :url => relationships_path, :html => {:method => :post}, :remote => true do |f| %>
+  <div><%= hidden_field_tag :actor_id, @actor.id %></div>
+  <%= f.submit "Follow", class: "btn btn-primary btn-block" %>
+<% end %>
+</div>

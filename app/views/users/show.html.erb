@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-8">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Home</li>
+        <li class="breadcrumb-item active"><%= link_to("Home", root_path) %></li>
         <li class="breadcrumb-item active">User</li>
         <li class="breadcrumb-item"><%= @user.id %></li>
       </ol>
@@ -13,20 +13,20 @@
         <p>Best check yo self,  <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
       </div>
 
-      <div class="panel panel-default">
+      <div class="panel panel-primary">
         <div class="panel-heading">Title here</div>
         <div class="panel-body">
-          sldkfjlskdjflskjdflskjdflkjsdlkfj
+          Porn Here
         </div>
         <div class="panel-footer">Footer here</div>
       </div>
+
     </div>
 
     <div class="col-md-4">
       <div class="list-group">
-        <li class="list-group-item">
-          <span class="tag tag-default tag-pill float-xs-right">14</span>
-          Cras justo odio
+        <li class="list-group-item text-center">
+          Site News
         </li>
         <a href="#" class="list-group-item list-group-item-action active">
           <h4 class="list-group-item-heading">List group item heading</h4>
@@ -37,6 +37,14 @@
           <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
         </a>
       </div>
+      <h3>Following</h3>
+      <ul class="list-group">
+        <% @user.actors.each do |actor| %>
+        <li class="list-group-item">
+          <%= link_to actor.name, actor_path(Actor.where('actor_label = ?', actor.actor_label).first.id) %>
+        </li>
+        <% end %>
+      </ul>
 
     </div>
 

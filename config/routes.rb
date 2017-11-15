@@ -10,5 +10,8 @@ Rails.application.routes.draw do
   resources :actors, only:[:index, :show]
   resources :stars, only:[:index, :show]
   resources :users
+
+  resource :relationships, only:[:create, :destroy]
+  
   root 'welcome#index'
 end

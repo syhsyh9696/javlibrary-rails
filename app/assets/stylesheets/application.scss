@@ -20,7 +20,7 @@
  @import "bootstrap-sprockets";
 
  // Import cerulean variables
- @import "bootswatch/darkly/variables";
+ @import "bootswatch/flatly/variables";
 
  // Then bootstrap itself
  @import "bootstrap";
@@ -29,7 +29,7 @@
  body { padding-top: 70px; }
 
  // And finally bootswatch style itself
- @import "bootswatch/darkly/bootswatch";
+ @import "bootswatch/flatly/bootswatch";
 
  // Whatever application styles you have go last
  @import "base";

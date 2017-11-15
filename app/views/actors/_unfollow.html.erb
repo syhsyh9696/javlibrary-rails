@@ -1,0 +1,6 @@
+<div id="follow_form">
+<%= form_for current_user, :url => relationships_path, :html => {:method => :delete}, :remote => true do |f| %>
+  <div><%= hidden_field_tag :actor_id, @actor.id %></div>
+  <%= f.submit "Unfollow", class: "btn btn-secondary btn-block" %>
+<% end %>
+</div>
