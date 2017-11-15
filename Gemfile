@@ -49,6 +49,9 @@ gem 'ransack'
 
 gem 'devise'
 
+# Char.js
+gem 'chart-js-rails'
+
 # 分页
 gem 'will_paginate-bootstrap'
 

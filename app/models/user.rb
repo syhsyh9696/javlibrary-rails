@@ -18,4 +18,5 @@ class User < ApplicationRecord
   def following?(other_actor)
     self.actors.include?(other_actor)
   end
+
 end
