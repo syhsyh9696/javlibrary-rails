@@ -4,12 +4,18 @@ class RelationshipsController < ApplicationController
   def create
     @actor = Actor.find(params[:actor_id])
     current_user.follow(@actor.id)
-    redirect_to @actor
+    respond_to do |format|
+      format.html { redirect_to @actor }
+      format.js
+    end
   end
 
   def destroy
     @actor = Actor.find(params[:actor_id])
     current_user.unfollow(@actor.id)
-    redirect_to @actor
+    respond_to do |format|
+      format.html { redirect_to @actor }
+      format.js
+    end
   end
 end
