@@ -7,11 +7,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :actors, only:[:index, :show]
+  resources :actors, only:[:index, :show] do
+    member do
+      get 'dataset'
+    end
+  end
+
   resources :stars, only:[:index, :show]
   resources :users
-
   resource :relationships, only:[:create, :destroy]
-  
+
   root 'welcome#index'
 end
