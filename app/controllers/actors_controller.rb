@@ -9,4 +9,9 @@ class ActorsController < ApplicationController
   def show
     @actor = Actor.find(params[:id])
   end
+
+  def dataset
+    @actor = Actor.find(params[:id])
+    render :json => @actor.videos_dataset
+  end
 end

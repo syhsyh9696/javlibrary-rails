@@ -10,7 +10,7 @@ class Actor < ApplicationRecord
   end
 
   def first_year
-    Time.new(self.videos.first.release_date).year
+    Time.new(self.videos.sort_by{ |video| video.release_date }).year
   end
 
   def annual
@@ -26,7 +26,7 @@ class Actor < ApplicationRecord
     annual_info
   end
 
-  def chart_dataset
+  def videos_dataset
     info = self.annual; index_result = []; result = {}
     info.each { |index, value| index_result << index }
     result['labels'] = index_result; result['values'] = info.values

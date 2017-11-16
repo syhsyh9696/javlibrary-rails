@@ -6,7 +6,8 @@
 
 <div class="row">
   <div class="col-md-3">
-    <h2><%= @actor.name %></h2><strong><%= @actor.followers %></strong> <%= "Follower".pluralize(@actor.followers) %>
+    <h2><%= @actor.name %></h2>
+    <%= render 'follower' %>
     <% unless !current_user %>
       <div id="follow_form">
         <% if current_user.following?(@actor) %>
