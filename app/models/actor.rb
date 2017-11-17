@@ -10,7 +10,7 @@ class Actor < ApplicationRecord
   end
 
   def first_year
-    Time.new(self.videos.sort_by{ |video| video.release_date }).year
+    Time.new(self.videos.sort_by(&:release_date).first.release_date).year
   end
 
   def annual
