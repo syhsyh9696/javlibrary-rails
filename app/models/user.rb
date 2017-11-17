@@ -19,4 +19,16 @@ class User < ApplicationRecord
     self.actors.include?(other_actor)
   end
 
+  def recent_videos
+    now = Time.new; time = now.to_s.split[0][0..-4]
+
+    videos = []
+    self.actors.each do |actor|
+      actor.videos.each do |video|
+        videos << video if video.release_date == time
+      end
+    end
+    videos
+  end
+
 end
