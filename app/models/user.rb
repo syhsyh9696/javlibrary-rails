@@ -25,7 +25,7 @@ class User < ApplicationRecord
     videos = []
     self.actors.each do |actor|
       actor.videos.each do |video|
-        videos << video if video.release_date == time
+        videos << [actor.name, video] if video.release_date[0..-4] == time
       end
     end
     videos

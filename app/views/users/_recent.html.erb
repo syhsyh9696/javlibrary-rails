@@ -1,0 +1,21 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>#</th>
+      <th>ID</th>
+      <th>Actor</th>
+      <th>Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.recent_videos.each do |array| %>
+      <% video = array[1] %>
+      <tr class="table-info">
+        <td><%= video.id %></td>
+        <td><%= video.video_id %></td>
+        <td><%= array[0] %></td>
+        <td><%= video.release_date %></td>
+      </tr>
+    <% end %>
+    </tbody>
+</table>
