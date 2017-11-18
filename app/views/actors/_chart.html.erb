@@ -1,6 +1,7 @@
 <div id="chart-wrapper">
   <canvas id="myChart"></canvas>
 </div>
+
 <script>
 var actor_label;
 var actor_dataset;
@@ -29,10 +30,9 @@ var myChart = new Chart(ctx, {
 			         strokeColor : "rgba(151,187,205,1)",
 			         pointColor : "rgba(151,187,205,1)",
 			         pointStrokeColor : "#fff",
-			         data : actor_dataset
-		        }
-        ]
-    },
-
+			         data : actor_dataset,
+               fill : true
+		        }],
+    }
 });
 </script>

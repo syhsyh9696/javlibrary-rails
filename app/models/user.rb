@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_and_belongs_to_many :actors, -> { distinct }
+  has_and_belongs_to_many :videos, -> { distinct }
 
 
   def follow(actor_id)
@@ -29,6 +30,14 @@ class User < ApplicationRecord
       end
     end
     videos
+  end
+
+  def fave_video(video_id)
+    self.videos << Video.find(video_id) unless self.videos.include?(Video.find(video_id))
+  end
+
+  def unfave_video(video_id)
+    self.videos.delete(Video.find(video_id)) if self.videos.include?(Video.find(video_id))
   end
 
 end

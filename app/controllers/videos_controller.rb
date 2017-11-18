@@ -14,6 +14,24 @@ class VideosController < ApplicationController
     end
   end
 
+  def fave
+    @video = Video.find(params[:video_id])
+    current_user.fave_video(@video.id)
+    respond_to do |format|
+      format.html { redirect_to @video }
+      format.js
+    end
+  end
+
+  def unfave
+    @video = Video.find(params[:video_id])
+    current_user.unfave_video(@video.id)
+    respond_to do |format|
+      format.html { redirect_to @video }
+      format.js
+    end
+  end
+
 protected
   def validate_search_key
     @query_string = params[:q].gsub(/\\|\'|\/|\?/, "") if params[:q].present?

@@ -12,7 +12,9 @@
   <img src="<%= @video.img %>">
   <br>
   <br>
-  <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+  <% if current_user %>
+    <p><%= render 'like' %></p>
+  <% end %>
 </div>
 <h2>Actors</h2>
 <table class="table table-striped table-hover ">

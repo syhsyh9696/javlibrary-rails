@@ -2,7 +2,6 @@
   <li class="breadcrumb-item"><%= link_to("Home", root_path) %></li>
   <li class="breadcrumb-item"><%= link_to("Actors", actors_path) %></li>
   <li class="breadcrumb-item active"><%= @actor.name %></li>
-  <li class="breadcrumb-item active" id="actor_id"><%= @actor.id %></li>
 </ol>
 
 <div class="row">
@@ -25,11 +24,11 @@
     <ul class="nav nav-tabs">
       <li class="active"><a href="#pics" data-toggle="tab" aria-expanded="true">Pics</a></li>
       <li class=""><a href="#videos" data-toggle="tab" aria-expanded="false">Videos</a></li>
-      <li class="disabled"><a>Disabled</a></li>
+      <!-- <li class="disabled"><a>Disabled</a></li> -->
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Dropdown <span class="caret"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Information <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#dropdown1" data-toggle="tab">Action</a></li>
+          <li><a href="#dropdown1" data-toggle="tab">Statistics</a></li>
           <li class="divider"></li>
           <li><a href="#dropdown2" data-toggle="tab">Another action</a></li>
         </ul>
