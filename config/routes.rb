@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :stars, only:[:index, :show]
   resources :users do
-    member do
+    collection do
       get 'videos'
     end
   end

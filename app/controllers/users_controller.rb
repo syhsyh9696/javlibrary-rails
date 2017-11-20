@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def videos
-    @videos = User.find(current_user.id).videos
+    @user = current_user
+    @videos = @user.videos
   end
 end
