@@ -16,7 +16,12 @@ Rails.application.routes.draw do
   end
 
   resources :stars, only:[:index, :show]
-  resources :users
+  resources :users do
+    member do
+      get 'videos'
+    end
+  end
+
   resource :relationships, only:[:create, :destroy]
 
   root 'welcome#index'

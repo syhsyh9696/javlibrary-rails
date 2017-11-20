@@ -1,0 +1,22 @@
+<h2 class='text-center'>Liked Video List</h2>
+<br>
+<table class="table table-striped table-hover table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th>#</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @videos.each do |video| %>
+      <tr class="table-info">
+        <td><%= video.id %></td>
+        <td><%= link_to video.video_id, video_path(video) %></td>
+        <td><%= format_video_name(video.video_name) %></td>
+        <td><%= video.release_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

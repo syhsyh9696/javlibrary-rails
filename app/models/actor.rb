@@ -33,4 +33,14 @@ class Actor < ApplicationRecord
     result
   end
 
+  def genres_dataset
+    result = Hash.new
+    self.videos.each do |video|
+      video.genres.each do |genre|
+        result[genre.name] = 1 if result[genre.name] == nil
+        result[genre.name] += 1
+      end
+    end
+    
+  end
 end
