@@ -1,0 +1,41 @@
+<div class="panel panel-primary">
+  <div class="panel-heading text-center">Genres Statistics</div>
+  <div class="panel-body">
+    <div id="chart-wrapper">
+      <canvas id="genres"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+var genres;
+var values;
+var url = window.location.href;
+url = url + "/genres"
+
+$.ajax({
+       url: url,
+       dataType: 'JSON',
+       type: 'GET',
+       async: false,
+       success: function(result) {
+         genres = result.genres;
+         values = result.values;
+       }
+});
+
+var ctx = document.getElementById("genres").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels : genres,
+        datasets : [
+          {
+            fillColor : "rgba(220,220,220,0.5)",
+            strokeColor : "rgba(220,220,220,1)",
+            data : values
+          }
+        ]
+    }
+});
+</script>

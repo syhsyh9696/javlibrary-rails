@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   resources :actors, only:[:index, :show] do
     member do
-      get 'dataset'
+      get 'output'
+      get 'genres'
     end
   end
 

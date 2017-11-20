@@ -34,7 +34,8 @@ class Actor < ApplicationRecord
   end
 
   def genres_dataset
-    result = Hash.new
+    result = Hash.new; name = Array.new; json = Hash.new
+
     self.videos.each do |video|
       video.genres.each do |genre|
         result[genre.name] = 1 if result[genre.name] == nil
@@ -42,5 +43,9 @@ class Actor < ApplicationRecord
       end
     end
     
+    result.each { |index, value| name << index }
+    json['genres'] = name; json['values'] = result.values
+    json
   end
+
 end

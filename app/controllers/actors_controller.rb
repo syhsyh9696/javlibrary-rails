@@ -10,8 +10,13 @@ class ActorsController < ApplicationController
     @actor = Actor.find(params[:id])
   end
 
-  def dataset
+  def output
     @actor = Actor.find(params[:id])
     render :json => @actor.videos_dataset
+  end
+
+  def genres
+    @actor = Actor.find(params[:id])
+    render :json => @actor.genres_dataset
   end
 end

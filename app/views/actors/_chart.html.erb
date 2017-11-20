@@ -1,12 +1,17 @@
-<div id="chart-wrapper">
-  <canvas id="myChart"></canvas>
+<div class="panel panel-primary">
+  <div class="panel-heading text-center">Annual Output</div>
+  <div class="panel-body">
+    <div id="chart-wrapper">
+      <canvas id="output"></canvas>
+    </div>
+  </div>
 </div>
 
 <script>
 var actor_label;
 var actor_dataset;
 var url = window.location.href;
-url = url + "/dataset"
+url = url + "/output"
 
 $.ajax({
        url: url,
@@ -19,7 +24,7 @@ $.ajax({
        }
 });
 
-var ctx = document.getElementById("myChart").getContext('2d');
+var ctx = document.getElementById("output").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
