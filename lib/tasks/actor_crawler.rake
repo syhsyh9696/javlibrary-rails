@@ -61,12 +61,12 @@ def get_all_actors_label_from_javbus
   page = Mechanize.new
   firsturl = "https://www.javbus2.pw/actresses/"
   #1.upto(JAVBUS_MAX_PAGE).each do |num|
-  716.upto(JAVBUS_MAX_PAGE).each do |num|
+  1.upto(JAVBUS_MAX_PAGE).each do |num|
     url = firsturl + num.to_s
     doc = Nokogiri::HTML(page.get(url).body)
     doc.search('//div[@id="waterfall"]/div/a/div[1]/img').each do |item|
       label = item.attributes['src'].value.split('/')[-1].split('_')[0]
-      name = item.attributes['title'].value.split('（')[0]
+      name = item.attributes['title'].value.split('（')[0].strip
 
       next if label == "nowprinting.gif"
 
@@ -74,7 +74,7 @@ def get_all_actors_label_from_javbus
       next if actor == nil
 
       actor.javbus_label = label
-      # actor.save
+      actor.save
     end
   end
 end

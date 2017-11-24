@@ -17,11 +17,18 @@ Rails.application.routes.draw do
   end
 
   resources :stars, only:[:index, :show]
+
   resources :users do
     collection do
       get 'videos'
     end
+
+    member do
+      get 'feed', format: 'rss'
+    end
   end
+
+  resource :news
 
   resource :relationships, only:[:create, :destroy]
 

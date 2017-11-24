@@ -6,6 +6,9 @@
 
 <div class="row">
   <div class="col-md-3">
+    <% if @actor.javbus_label != nil %>
+      <img src="https://pics.javcdn.pw/actress/<%= @actor.javbus_label %>_a.jpg">
+    <% end %>
     <h2><%= @actor.name %></h2>
     <%= render 'follower' %>
     <% unless !current_user %>
