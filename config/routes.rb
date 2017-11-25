@@ -33,4 +33,5 @@ Rails.application.routes.draw do
   resource :relationships, only:[:create, :destroy]
 
   root 'welcome#index'
+  get '/rss', to: 'welcome#rss'
 end

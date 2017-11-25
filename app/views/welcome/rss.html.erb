@@ -1,0 +1,47 @@
+<div class="col-lg-12 text-center">
+  <h2>AVDICT RSS SUPPORT PAGE</h2>
+  <hr class="star-primary">
+</div>
+
+<div class="col-lg-8 col-lg-offset-2">
+  <p>
+    Avdict provides RSS service(Avdict RSS) to save your time.
+  </p>
+  <p>
+    AVDICT RSS feeds can, for example, allow you to keep track of many different actors in a single RSS aggregator.
+    AVDICT use RSS feeds to publish frequently updated information, such as new release videos or the actor who were newly added in the actor list.
+  </p>
+  <p>
+    You can also customize your own RSS feeds by Follow some actors in AVDICT. The customized feeds publish your following's recent published videos.
+  </p>
+  <br>
+  <p>
+    AVDICT 提供多个高效的 RSS 服务
+  </p>
+  <p>
+    AVDICT RSS 服务可以做到很多功能, 例如它可以让你在一个新闻聚合器中同时追踪多个你喜欢的演员。
+    同时它利用 RSS 服务去发布一定频率更新的信息, 例如最新的影片和刚加入演员列表的新演员。
+  </p>
+  <p>
+    当然你可以自己定制你的个性 RSS 源, 定制这个源你只需要在 AVDICT 里 Follow 你喜欢的演员, 个性的 RSS 源将会发布你追踪的演员最近的影片。
+  </p>
+  <br>
+
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>RSS Name</th>
+        <th>RSS Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if current_user %>
+      <tr>
+        <td>The customized RSS</td>
+        <td><%= link_to 'Customized RSS', user_path(current_user) + '/feed' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
