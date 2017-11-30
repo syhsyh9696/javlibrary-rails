@@ -67,4 +67,15 @@ class User < ApplicationRecord
     self.videos.delete(Video.find(video_id)) if self.videos.include?(Video.find(video_id))
   end
 
+  def genres_statistic
+    result = Hash.new
+    self.videos.each do |video|
+      video.genres.each do |genre|
+        result[genre.name] = 1 if result[genre.name] == nil
+        result[genre.name] += 1
+      end
+    end
+    result
+  end
+
 end
